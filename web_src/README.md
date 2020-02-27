@@ -8,4 +8,13 @@
 
 ## How to Develop
 
-Types go in `src/types.ts` (see typescript [interfaces and types](https://www.typescriptlang.org/play/index.html?e=164#example/structural-typing))
+``` sh
+yarn install
+yarn run dev
+
+```
+
+### Types
+
+Common types go in `src/types.ts` (see typescript [interfaces and types](https://www.typescriptlang.org/play/index.html?e=164#example/structural-typing))
+You can import these from any component!
