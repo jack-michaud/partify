@@ -1,0 +1,11 @@
+
+@tailwind base;
+@tailwind screens;
+
+// Insert your styles here
+body {
+  @apply bg-black;
+}
+
+@tailwind components;
+@tailwind utilities;
