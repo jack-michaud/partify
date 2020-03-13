@@ -1,4 +1,4 @@
-/// <reference path="../../node_modules/@types/spotify-api/spotify-api.d.ts" />
+
 
 export async function http(
     request: RequestInfo
@@ -12,6 +12,17 @@ export async function http(
 
 export async function searchPlaylist(query: string): Promise<SpotifyApi.PlaylistObjectSimplified[]> {
     return await http(query);
+}
+
+export async function getPlaylist(id: string): Promise<SpotifyApi.PlaylistObjectFull> {
+  try {
+    const resp = await fetch(`http://localhost:8080/playlists/${id}`);
+    const data: SpotifyApi.PlaylistObjectFull = await resp.json();
+    return data;
+  } catch (e) {
+    console.error(e);
+    throw 'Failed to fetch playlist'
+  }
 }
 
 function makeUrl(search: string): string {
