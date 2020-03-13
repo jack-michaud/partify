@@ -5,7 +5,15 @@
 // Insert your styles here
 body {
   @apply bg-black;
+  @apply text-purple-500;
 }
+
 
 @tailwind components;
 @tailwind utilities;
+
+a {
+  &:hover {
+    @apply text-purple-400;
+  }
+}
