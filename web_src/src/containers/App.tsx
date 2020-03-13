@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchPageComponent from "../components/SearchPageComponent";
 
 import 'babel-polyfill';
 
@@ -6,7 +7,9 @@ const App = () => {
 
   return (
     <div className="text-purple-500">
-      Hi :D
+      <div>
+        <SearchPageComponent />
+      </div>
     </div>
   )
 };
