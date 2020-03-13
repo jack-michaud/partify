@@ -1,8 +1,10 @@
 const express = require('express');
 const axios = require('axios');
 const getToken = require('../auth');
+const cors = require('cors');
 
 const router = new express.Router;
+router.use(cors());
 
 router.get('/', async (req, res) => {
   const token = await getToken();
@@ -16,7 +18,7 @@ router.get('/', async (req, res) => {
       'Authorization': 'Bearer ' + token
     },
   })
-  .catch((err) => res.send(err));
+    .catch((err) => res.send(err));
 
   // TODO: Only return the fields we actually care about
   return res.json(data);
@@ -33,7 +35,7 @@ router.get('/:playlistId', async (req, res) => {
       'Authorization': 'Bearer ' + token
     },
   })
-  .catch((err) => res.send(err));
+    .catch((err) => res.send(err));
 
   return res.json(data);
 });
