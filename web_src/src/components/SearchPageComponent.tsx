@@ -3,6 +3,7 @@ import { searchPlaylist } from '../services/PlaylistService';
 /// <reference path="../../node_modules/@types/spotify-api/spotify-api.d.ts" />
 
 import 'babel-polyfill';
+import PlaylistDetailComponent from './PlaylistDetailComponent';
 
 interface IState {
     searchQuery: string;
@@ -33,8 +34,9 @@ class SearchPageComponent extends React.PureComponent<IState> {
                 {
                     this.state.playlists && this.state.playlists.length > 0 && this.state.playlists.map(playlist =>
                         <li key={playlist.id}>
-                            {playlist.name}
+                            <PlaylistDetailComponent playlist={playlist} />
                         </li>
+
                     )
                 }
             </div >
