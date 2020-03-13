@@ -15,7 +15,7 @@ const TrackListItem = (props: IProps) => {
     <div className="sm:flex bg-black justify-start my-3 p-3"
          style={{backgroundColor: '#130f15'}}>
       <div className="">
-        <img className="w-24 h-24" src={ track.track.album.images[0].url }/>
+        <img className="w-24 h-24" src={ track.track.album.images[0]?.url }/>
       </div>
       <div className="p-2 h-full">
         <span className="text-purple-700 pr-2">
