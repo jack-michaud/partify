@@ -33,8 +33,10 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "@types/spotify-api": "0.0.2",
     "mqtt": "^3.0.0",
     "react-router-dom": "^5.1.2",
-    "tailwindcss": "^1.1.4"
+    "tailwindcss": "^1.1.4",
+    "tsd": "^0.11.0"
   }
 }
