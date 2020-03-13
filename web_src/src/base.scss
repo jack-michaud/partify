@@ -17,3 +17,14 @@ a {
     @apply text-purple-400;
   }
 }
+
+button {
+  @apply bg-purple-900 text-purple-300;
+
+  @apply py-1 px-2;
+  @apply rounded-lg;
+
+  &:hover {
+    @apply bg-purple-800;
+  }
+}

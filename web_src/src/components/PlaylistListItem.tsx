@@ -20,7 +20,7 @@ const PlaylistListItem = (props: IProps) => {
           <img className="w-full shadow-xs rounded" src={props.playlist.images[0].url} alt="" />
         </div>
         <div className="flex-1 px-3 bg-purple-700 sm:-ml-8 rounded flex flex-col">
-          <div className="uppercase mx-auto -mt-10 text-2xl bg-purple-600 p-2 rounded">
+          <div className="uppercase mx-auto -mt-10 text-2xl font-semibold bg-purple-600 p-2 rounded">
             <Link to={`/playlist/${props.playlist.id}`}>Playlist</Link>
           </div>
           <h1 className="text-2xl">{props.playlist.name}</h1>
