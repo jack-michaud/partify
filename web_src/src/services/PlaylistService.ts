@@ -1,22 +1,27 @@
 
-
-export async function http(
-    request: RequestInfo
-): Promise<SpotifyApi.PlaylistObjectSimplified[]> {
-    const url = "http://localhost:8080" + makeUrl(request);
-    const response = await fetch(url);
+export async function searchPlaylist(query: string): Promise<SpotifyApi.PlaylistObjectSimplified[]> {
+    // generates URLSearchParams
+    var searchParams = new URLSearchParams();
+    searchParams.set("q", encodeURI(query));
+    searchParams.set("type", "playlist");
+    // call API with full URL
+    var fullURL: string = makeURL("/playlists/?", searchParams);
+    const response = await http.get(fullURL);
+    // extracts playlists from response
     const body: SpotifyApi.PlaylistSearchResponse = await response.json();
     let playlists: SpotifyApi.PlaylistObjectSimplified[] = body.playlists.items
     return playlists;
 }
 
-export async function searchPlaylist(query: string): Promise<SpotifyApi.PlaylistObjectSimplified[]> {
-    return await http(query);
+const http = {
+    async get(url: string) {
+        return await fetch(url);
+    }
 }
 
 export async function getPlaylist(id: string): Promise<SpotifyApi.PlaylistObjectFull> {
   try {
-    const resp = await fetch(`http://localhost:8080/playlists/${id}`);
+    const resp = await http.get(makeURL(`/playlists/${id}`, new URLSearchParams()));
     const data: SpotifyApi.PlaylistObjectFull = await resp.json();
     return data;
   } catch (e) {
@@ -25,7 +30,7 @@ export async function getPlaylist(id: string): Promise<SpotifyApi.PlaylistObject
   }
 }
 
-function makeUrl(search: string): string {
-    const result = `/playlists/?q="` + encodeURI(search) + `"&type=playlist`
-    return result;
+// Returns a full URL (Ex: http://localhost:8080/playlists/?q="hello"&type=playlist)
+function makeURL(prefix: string, searchParams: URLSearchParams): string {
+    return "http://localhost:8080" + prefix + searchParams.toString();
 }
