@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { searchPlaylist } from '../services/PlaylistService';
 
 import 'babel-polyfill';
-import PlaylistDetailComponent from './PlaylistDetailComponent';
+import PlaylistListItem from './PlaylistListItem';
 
 interface IState {
     searchQuery: string;
@@ -33,7 +34,7 @@ class SearchPageComponent extends React.PureComponent<{}, IState> {
                 {
                     this.state.playlists && this.state.playlists.length > 0 && this.state.playlists.map(playlist =>
                         <li key={playlist.id}>
-                            <PlaylistDetailComponent playlist={playlist} />
+                            <PlaylistListItem playlist={playlist} />
                         </li>
 
                     )

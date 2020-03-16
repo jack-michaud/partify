@@ -5,7 +5,26 @@
 // Insert your styles here
 body {
   @apply bg-black;
+  @apply text-purple-500;
 }
+
 
 @tailwind components;
 @tailwind utilities;
+
+a {
+  &:hover {
+    @apply text-purple-400;
+  }
+}
+
+button {
+  @apply bg-purple-900 text-purple-300;
+
+  @apply py-1 px-2;
+  @apply rounded-lg;
+
+  &:hover {
+    @apply bg-purple-800;
+  }
+}

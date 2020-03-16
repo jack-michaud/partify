@@ -1,3 +1,4 @@
+
 export async function searchPlaylist(query: string): Promise<SpotifyApi.PlaylistObjectSimplified[]> {
     // generates URLSearchParams
     var searchParams = new URLSearchParams();
@@ -16,6 +17,17 @@ const http = {
     async get(url: string) {
         return await fetch(url);
     }
+}
+
+export async function getPlaylist(id: string): Promise<SpotifyApi.PlaylistObjectFull> {
+  try {
+    const resp = await http.get(makeURL(`/playlists/${id}`, new URLSearchParams()));
+    const data: SpotifyApi.PlaylistObjectFull = await resp.json();
+    return data;
+  } catch (e) {
+    console.error(e);
+    throw 'Failed to fetch playlist'
+  }
 }
 
 // Returns a full URL (Ex: http://localhost:8080/playlists/?q="hello"&type=playlist)

@@ -1,16 +1,28 @@
 import React from 'react';
 import SearchPageComponent from "../components/SearchPageComponent";
+import PlaylistDetailContainer from "./PlaylistDetailContainer";
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
 
 import 'babel-polyfill';
 
 const App = () => {
 
   return (
-    <div className="text-purple-500">
-      <div>
-        <SearchPageComponent />
-      </div>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/playlist/:playlistId">
+          <PlaylistDetailContainer />
+        </Route>
+        <Route path="/">
+          <SearchPageComponent />
+        </Route>
+      </Switch>
+    </Router>
   )
 };
 
