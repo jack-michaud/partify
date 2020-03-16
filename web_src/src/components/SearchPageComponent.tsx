@@ -1,6 +1,5 @@
 import React from 'react';
 import { searchPlaylist } from '../services/PlaylistService';
-/// <reference path="../../node_modules/@types/spotify-api/spotify-api.d.ts" />
 
 import 'babel-polyfill';
 import PlaylistDetailComponent from './PlaylistDetailComponent';
@@ -10,7 +9,7 @@ interface IState {
     playlists: SpotifyApi.PlaylistObjectSimplified[];
 }
 
-class SearchPageComponent extends React.PureComponent<IState> {
+class SearchPageComponent extends React.PureComponent<{}, IState> {
     state = {
         searchQuery: "",
         playlists: new Array(0)

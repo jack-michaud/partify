@@ -1,5 +1,4 @@
 import React from 'react';
-/// <reference path="../../node_modules/@types/spotify-api/spotify-api.d.ts" />
 
 import 'babel-polyfill';
 
