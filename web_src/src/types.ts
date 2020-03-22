@@ -4,7 +4,8 @@ export interface State {
   playlistsSearchQuery: string;
   playlistsSearchLoading: boolean;
 
-  playlistDetail: SpotifyApi.PlaylistObjectFull;
+  playlistDetailId?: string;
+  playlistDetailPlaylist?: SpotifyApi.PlaylistObjectFull;
   playlistDetailLoading: boolean;
 }
 export interface ActionType {
