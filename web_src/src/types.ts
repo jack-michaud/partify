@@ -9,6 +9,15 @@ export interface PlaylistState {
   playlistDetailLoading: boolean;
 }
 
+export interface Profile {
+  id: string;
+}
+export interface ProfileState {
+  profile?: Profile;
+  loggedIn: boolean;
+  logInError: string;
+}
+
 export interface ActionType {
   type: string;
   payload: any;
@@ -16,4 +25,6 @@ export interface ActionType {
 
 import { ThunkAction } from 'redux-thunk';
 import { Action } from 'redux';
-export type ThunkActionType = ThunkAction<void, State, unknown, Action<string>>;
+
+// T is State
+export type ThunkActionType<T> = ThunkAction<void, T, unknown, Action<string>>;

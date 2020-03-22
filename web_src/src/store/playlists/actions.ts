@@ -16,7 +16,7 @@ export const PLAYLIST_DETAIL_REQUEST = 'PLAYLIST_DETAIL_REQUEST';
 export const PLAYLIST_DETAIL_SUCCESS = 'PLAYLIST_DETAIL_SUCCESS';
 
 
-export const searchPlaylistAction = (query: string): ThunkActionType => async (dispatch) => {
+export const searchPlaylistAction = (query: string): ThunkActionType<PlaylistState> => async (dispatch) => {
   dispatch({
     type: SEARCH_PLAYLISTS_REQUEST
   });
@@ -26,7 +26,7 @@ export const searchPlaylistAction = (query: string): ThunkActionType => async (d
     payload: playlists
   });
 };
-export const setPlaylistSearchTextAction = (query: string): ThunkActionType => async (dispatch) => {
+export const setPlaylistSearchTextAction = (query: string): ThunkActionType<PlaylistState> => async (dispatch) => {
   dispatch({
     type: SEARCH_PLAYLISTS_QUERY,
     payload: query
@@ -34,7 +34,7 @@ export const setPlaylistSearchTextAction = (query: string): ThunkActionType => a
 };
 
 
-export const requestPlaylistDetailAction = (id: string): ThunkActionType => async (dispatch) => {
+export const requestPlaylistDetailAction = (id: string): ThunkActionType<PlaylistState> => async (dispatch) => {
   dispatch({
     type: PLAYLIST_DETAIL_REQUEST,
     payload: id
