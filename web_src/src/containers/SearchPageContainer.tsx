@@ -6,9 +6,11 @@ import {
 import { 
   searchPlaylistAction,
   setPlaylistSearchTextAction,
+} from '../store/playlists/actions';
+import { 
   playlistsSearchQuerySelector,
   playlistsSearchResultsSelector
-} from '../store';
+} from '../store/playlists/selectors';
 
 import SearchPageComponent from '../components/SearchPageComponent';
 

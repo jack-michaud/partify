@@ -1,5 +1,5 @@
 
-export interface State {
+export interface PlaylistState {
   playlistsSearchResults: SpotifyApi.PlaylistObjectSimplified[];
   playlistsSearchQuery: string;
   playlistsSearchLoading: boolean;
@@ -8,6 +8,7 @@ export interface State {
   playlistDetailPlaylist?: SpotifyApi.PlaylistObjectFull;
   playlistDetailLoading: boolean;
 }
+
 export interface ActionType {
   type: string;
   payload: any;

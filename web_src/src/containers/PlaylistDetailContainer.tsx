@@ -5,10 +5,13 @@ import {
 } from 'react-redux';
 import {
   requestPlaylistDetailAction,
+} from '../store/playlists/actions';
+import {
   playlistPreviewSelector,
   playlistDetailSelector,
   playlistDetailLoadingSelector
-} from '../store';
+} from '../store/playlists/selectors';
+
 import { useParams } from 'react-router-dom';
 
 import PlaylistDetailComponent from '../components/PlaylistDetailComponent';
