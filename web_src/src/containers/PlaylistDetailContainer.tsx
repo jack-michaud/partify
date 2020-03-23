@@ -32,18 +32,21 @@ const PlaylistDetailContainer = () => {
   // only runs when playlistId changes
   }, [playlistId]);
 
-  if (playlistPreview || playlist) {
+  // If both the playlist simple details are not there
+  // and the detailed playlist is not there, show "loading"
+  if (playlist || playlistPreview) {
+    return (
+      <PlaylistDetailComponent 
+        loading={loading}
+        // Show
+        playlist={playlist || playlistPreview} />
+      )
+  } else {
     return (
       <div className="h-full flex items-center justify-center text-5xl uppercase">
         Loading...
       </div>
     )
   }
-  return (
-    <PlaylistDetailComponent 
-      playlistPreview={playlistPreview}
-      loading={loading}
-      playlist={playlist} />
-  )
 }
 export default PlaylistDetailContainer;

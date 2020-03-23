@@ -1,15 +1,15 @@
 import {
-  PlaylistState,
-} from '../../types';
+  RootState,
+} from '../index';
 import { createSelector } from 'reselect';
 
-export const playlistsSearchResultsSelector = (state: PlaylistState) => state.playlistsSearchResults;
-export const playlistsSearchQuerySelector = (state: PlaylistState) => state.playlistsSearchQuery;
+export const playlistsSearchResultsSelector = (state: RootState) => state.playlists.playlistsSearchResults;
+export const playlistsSearchQuerySelector = (state: RootState) => state.playlists.playlistsSearchQuery;
 
-export const playlistDetailLoadingSelector = (state: PlaylistState) => state.playlistDetailLoading;
-export const playlistDetailSelector = (state: PlaylistState) => state.playlistDetailPlaylist;
+export const playlistDetailLoadingSelector = (state: RootState) => state.playlists.playlistDetailLoading;
+export const playlistDetailSelector = (state: RootState) => state.playlists.playlistDetailPlaylist;
 
-const playlistDetailIdSelector = (state: PlaylistState) => state.playlistDetailId;
+const playlistDetailIdSelector = (state: RootState) => state.playlists.playlistDetailId;
 export const playlistPreviewSelector = createSelector(
   [
     playlistsSearchResultsSelector,

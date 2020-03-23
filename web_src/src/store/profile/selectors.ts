@@ -1,12 +1,12 @@
 import {
-  ProfileState
-} from '../../types';
+  RootState
+} from '../index';
 
-export const profileSelector = (state: ProfileState) => 
-  state.profile;
+export const profileSelector = (state: RootState) => 
+  state.profile.profile;
 
-export const isLoggedInSelector = (state: ProfileState) => 
-  state.loggedIn;
+export const isLoggedInSelector = (state: RootState) => 
+  state.profile.loggedIn;
 
-export const logInErrorSelector = (state: ProfileState) => 
-  state.logInError;
+export const logInErrorSelector = (state: RootState) => 
+  state.profile.logInError;
