@@ -15,9 +15,9 @@ const PlaylistListItem = (props: IProps) => {
 
   return (
     <div>
-      <div className="flex flex-row mx-auto max-w-3xl p-3 text-white items-center">
+      <div className="sm:flex flex-row mx-auto max-w-3xl p-3 text-white items-center h-64">
         <div className="flex-1">
-          <img className="w-full shadow-xs rounded" src={props.playlist.images[0].url} alt="" />
+          <img className="h-full shadow-xs rounded" src={props.playlist.images[0].url} alt="" />
         </div>
         <div className="flex-1 px-3 bg-purple-700 sm:-ml-8 rounded flex flex-col">
           <div className="uppercase mx-auto -mt-10 text-2xl font-semibold bg-purple-600 p-2 rounded">

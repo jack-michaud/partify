@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchPageComponent from "../components/SearchPageComponent";
+import SearchPageContainer from './SearchPageContainer';
 import PlaylistDetailContainer from "./PlaylistDetailContainer";
 
 import {
@@ -19,7 +19,7 @@ const App = () => {
           <PlaylistDetailContainer />
         </Route>
         <Route path="/">
-          <SearchPageComponent />
+          <SearchPageContainer />
         </Route>
       </Switch>
     </Router>

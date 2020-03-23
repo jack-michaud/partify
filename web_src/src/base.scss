@@ -18,6 +18,10 @@ a {
   }
 }
 
+li {
+  list-style: none;
+}
+
 button {
   @apply bg-purple-900 text-purple-300;
 
