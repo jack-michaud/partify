@@ -3,19 +3,14 @@
 
 - Express
 - Node
+- Mongo
 
 ## How to Develop
-
 - Add CLIENT_ID and CLIENT_SECRET to your environment
+- `yarn install` and `yarn run dev` in /backend_src/ will operate both services at the same time
 ``` sh
 yarn install
 yarn run dev
 ```
-- Go to localhost:8080
-- /playlists/?q=QUERY - [Spotify Docs](https://developer.spotify.com/console/get-search-item/?q=%22doom%20metal%22&type=playlist)
-- /playlists/playlistId - [Spotify Docs](https://developer.spotify.com/console/get-playlist/)
-
-## Todo
-
-- Validate JSON of requests
-- Return only important fields from endpoints
+- HTTP API runs on localhost:8080
+- Mongo runs on localhost:27017
