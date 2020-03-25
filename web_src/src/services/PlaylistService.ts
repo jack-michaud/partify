@@ -2,7 +2,7 @@
 export async function searchPlaylist(query: string): Promise<SpotifyApi.PlaylistObjectSimplified[]> {
   // generates URLSearchParams
   var searchParams = new URLSearchParams();
-  searchParams.set("q", encodeURI(query));
+  searchParams.set("q", query);
   searchParams.set("type", "playlist");
   // call API with full URL
   var fullURL: string = makeURL("/playlists/?", searchParams);

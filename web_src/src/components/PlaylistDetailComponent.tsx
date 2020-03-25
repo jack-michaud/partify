@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   Link
@@ -35,7 +36,7 @@ const PlaylistDetailComponent = (props: IProps) => {
         </div>
       </div>
 
-      { props.playlist.tracks.items ?
+      { props.playlist?.tracks.items ?
       <div className="w-full flex flex-col">
         <div className="text-3xl uppercase italic mx-auto inline-block self-center mt-5">
           Tracks
@@ -47,7 +48,8 @@ const PlaylistDetailComponent = (props: IProps) => {
             ))
           }
         </div>
-      </div> : null }
+      </div> 
+      : <div className="italics text-purple-800 text-center">Loading...</div> }
     </div>
   )
 }

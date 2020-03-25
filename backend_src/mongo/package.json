@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "workspaces": {
+    "nohoist": [
+      "**/*"
+    ]
+  },
+  "name": "mongo",
+  "version": "1.0.0",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "mongod --dbpath ./data/partify_db"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^5.9.5"
+  }
+}
