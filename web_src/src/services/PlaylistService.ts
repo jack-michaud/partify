@@ -32,5 +32,5 @@ export async function getPlaylist(id: string): Promise<SpotifyApi.PlaylistObject
 
 // Returns a full URL (Ex: http://localhost:8080/playlists/?q="hello"&type=playlist)
 function makeURL(prefix: string, searchParams: URLSearchParams): string {
-  return "https://partify-backend-src.herokuapp.com" + prefix + searchParams.toString();
+  return process.env.API_URL + prefix + searchParams.toString();
 }

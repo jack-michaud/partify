@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -23,7 +24,10 @@ module.exports = {
         viewport: "width=device-width, initial-scale=1"
       }
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new webpack.EnvironmentPlugin({
+      API_URL: 'http://localhost:8080'
+    })
   ],
   module: {
     rules: [
