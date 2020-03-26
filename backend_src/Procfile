@@ -1,0 +1,1 @@
+web: node backend_src/http_api/app.js &
