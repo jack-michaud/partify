@@ -1,1 +1,1 @@
-web: node ./backend_src/http_api/app.js
+web: node ./http_api/app.js
