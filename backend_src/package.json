@@ -13,6 +13,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "./start.sh",
-    "heroku-postbuild": "node ./http_api/app.js &"
+    "heroku-postbuild": "yarn install"
   }
 }
