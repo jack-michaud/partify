@@ -1,35 +1,25 @@
 const mongoose = require('mongoose');
+
+const BasicInfo	= mongoose.Schema({
+  id: ObjectId,
+  name: String,
+  date: Date,
+});
+
 modules.exports = mongoose.Schema({
-	 _id: Number,
+	 _id: ObjectId,
 	 name: String,
-	 joined: Number,
+	 joined: String,
 	 spotifyId: String,
 	 refreshToken: String,
 	 accessToken: String,
 	 friends: [{
-     type: Number,
+     type: ObjectId,
      ref: 'UserModel'
    }],
-	 /*
-	 playlists: [{
-     type: Number,
-     ref: 'PlaylistModel'
-   }],
-   favoriteTracks: [{
-     type: Number,
-     ref: 'TrackModel'
-   }],
-	 favoriteArtists: [{
-     type: Number,
-     ref: 'ArtistModel'
-   }],
-	 favoriteAlbums: [{
-     type: Number,
-     ref: 'AlbumModel'
-   }],
-	 favoriteGenres: [{
-     type: Number,
-     ref: 'GenreModel'
-   }],
-	 */
+	 playlists: [BasicInfo],
+   favoriteTracks: [BasicInfo],
+	 favoriteArtists: [BasicInfo],
+	 favoriteAlbums: [BasicInfo],
+	 favoriteGenres: [BasicInfo],
 }, {collection: 'users'});
