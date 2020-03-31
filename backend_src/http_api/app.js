@@ -1,12 +1,15 @@
 const express = require('express');
 const db = require('./db.js');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const playlistRouter = require('./routes/playlists');
 const userRouter = require('./routes/users');
+const auth = require('./auth');
 
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.set('Content-Type', 'text/html');
@@ -17,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.use('/playlists', playlistRouter);
 app.use('/users', userRouter);
+app.use('/auth-spotify', auth.spotifyAuthEndpoint);
 
 db.connect(process.env.MONGODB_URI, (err) => {
   if (err) throw err;
