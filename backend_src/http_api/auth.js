@@ -20,7 +20,7 @@ const getToken = async () => {
   return access_token;
 }
 
-const refreshAccessToken = async (refresh_token) => {
+const refreshAccessToken = async (refresh_token_old) => {
   const { data: { access_token, refresh_token } } = await axios({
     url: 'https://accounts.spotify.com/api/token',
     method: 'post',
@@ -30,7 +30,7 @@ const refreshAccessToken = async (refresh_token) => {
     },
     params: {
       grant_type: 'refresh_token',
-      refresh_token
+      refresh_token: refresh_token_old
     },
   });
   return { access_token, refresh_token };
