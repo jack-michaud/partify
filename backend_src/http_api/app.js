@@ -1,8 +1,11 @@
 const express = require('express');
+const db = require('./db.js');
 const cors = require('cors');
 const playlistRouter = require('./routes/playlists');
+const userRouter = require('./routes/users');
 
 const app = express();
+
 app.use(cors());
 
 app.get('/', (req, res) => {
@@ -13,5 +16,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/playlists', playlistRouter);
+app.use('/users', userRouter);
 
-app.listen(process.env.PORT || 8080);
+db.connect(process.env.MONGODB_URI, (err) => {
+  if (err) throw err;
+  app.listen(process.env.PORT || 8080);
+});
