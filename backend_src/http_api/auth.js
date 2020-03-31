@@ -95,7 +95,7 @@ spotifyAuthEndpoint.post('/', async (req, res, next) => {
         spotifyId: id,
         refreshToken: refresh_token,
         accessToken: access_token,
-        fiends: [],
+        friends: [],
         playlists: [],
         favoriteTracks: [],
         favoriteArtists: [],
