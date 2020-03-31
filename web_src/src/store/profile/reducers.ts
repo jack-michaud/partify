@@ -7,7 +7,7 @@ import {
 
 const initialState: ProfileState = {
   profile: null,
-  loggedIn: false,
+  loggedIn: null,
   logInError: null
 }
 
@@ -22,10 +22,11 @@ const reducers = (state: ProfileState = initialState, action: ActionType): Profi
   if (action.type == PROFILE_LOG_IN_FAILURE) {
     return {
       ...state,
+      loggedIn: false,
       logInError: action.payload
     }
   }
-  if (action.type == PROFILE_LOG_IN_REQUEST) {}
+  if (action.type == PROFILE_LOG_IN_REQUEST) { return state; }
   if (action.type == PROFILE_LOG_IN_SUCCESS) {
     return {
       ...state,
