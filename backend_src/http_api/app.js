@@ -18,7 +18,10 @@ app.use(bodyParser.json());
 
 // Session store
 app.use(session({
-  cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  cookie: { 
+    maxAge: 1000 * 60 * 60 * 24,
+    secure: 'auto'
+  },
   resave: false,
   saveUninitialized: true,
   secret: process.env.CLIENT_SECRET,
