@@ -26,7 +26,8 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
     new webpack.EnvironmentPlugin({
-      API_URL: 'http://localhost:8080'
+      API_URL: 'http://localhost:8080',
+      SPOTIFY_CLIENT_ID: null
     })
   ],
   module: {
