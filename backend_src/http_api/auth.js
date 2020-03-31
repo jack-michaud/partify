@@ -1,5 +1,6 @@
 const axios = require('axios');
 const express = require('express');
+const db = require('./db');
 
 
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -30,7 +31,7 @@ const getUserAccessKeys = async (code) => {
     params: {
       grant_type: 'authorization_code',
       code,
-      redirect_uri: process.env.REDIRECT_URI
+      redirect_uri: process.env.REDIRECT_URI + '/'
     },
   });
   return { access_token, refresh_token };
@@ -65,6 +66,29 @@ spotifyAuthEndpoint.post('/', async (req, res, next) => {
       display_name, 
       id
     } = await getSpotifyMe(access_token);
+    console.log(display_name + ' logged in');
+
+    if (await db.get().collection('users').findOne({ spotifyId: id })) {
+      // User already created, do not create
+    } else {
+      // Create new user
+      console.log('Creating user entry');
+      const user = await db.get().collection('users').insertOne({
+        name: display_name,
+        joined: new Date().toISOString(),
+        spotifyId: id,
+        refreshToken: refresh_token,
+        accessToken: access_token,
+        fiends: [],
+        playlists: [],
+        favoriteTracks: [],
+        favoriteArtists: [],
+        favoriteAlbums: [],
+        favoriteGenres: []
+      });
+    }
+
+    req.session.spotifyId = id;
     res.json({ name: display_name });
   } catch (exception) {
     console.log(exception);

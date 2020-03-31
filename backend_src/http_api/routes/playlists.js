@@ -4,7 +4,6 @@ const auth = require('../auth');
 const cors = require('cors');
 
 const router = new express.Router;
-router.use(cors());
 
 router.get('/', async (req, res) => {
   const token = await auth.getToken();
