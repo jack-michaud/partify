@@ -13,6 +13,7 @@ yarn install
 yarn run dev
 
 ```
+Add `SPOTIFY_CLIENT_ID` to environment variables
 
 ### Types
 

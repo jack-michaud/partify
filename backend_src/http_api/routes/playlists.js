@@ -1,13 +1,12 @@
 const express = require('express');
 const axios = require('axios');
-const getToken = require('../auth');
+const auth = require('../auth');
 const cors = require('cors');
 
 const router = new express.Router;
-router.use(cors());
 
 router.get('/', async (req, res) => {
-  const token = await getToken();
+  const token = await auth.getToken();
   // TODO: Parse req.query as JSON and validate it
   const query = req.originalUrl.split('\/', 3)[2];
 
@@ -25,7 +24,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:playlistId', async (req, res) => {
-  const token = await getToken();
+  const token = await auth.getToken();
   const { playlistId } = req.params;
 
   const { data } = await axios({

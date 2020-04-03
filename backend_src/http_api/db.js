@@ -2,6 +2,7 @@ const { MongoClient } = require('mongodb');
 
 const state = {
   db: null,
+  client: null
 };
 
 exports.connect = (url, done) => {
@@ -9,15 +10,18 @@ exports.connect = (url, done) => {
 
   MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
     if(err) return done(err);
-    // The name of the database is the username in the mongodb URI
-    const dbName = process.env.MONGODB_URI.split('mongodb://').pop().split(':')[0];
+    const dbName = process.env.MONGODB_URI.split('mongodb://').pop().split('/')[1];
     state.db = client.db(dbName);
+    state.client = client;
     done();
   });
 };
 
 exports.get = () => {
   return state.db;
+};
+exports.getClient = () => {
+  return state.client;
 };
 
 exports.close = (done) => {

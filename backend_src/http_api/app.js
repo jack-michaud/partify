@@ -1,12 +1,29 @@
 const express = require('express');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const db = require('./db.js');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const playlistRouter = require('./routes/playlists');
 const userRouter = require('./routes/users');
+const auth = require('./auth');
+
 
 const app = express();
+app.use(cors({
+  origin: process.env.REDIRECT_URI,
+  credentials: true
+}));
+app.use(bodyParser.json());
 
-app.use(cors());
+// Session store
+app.use(session({
+  cookie: { maxAge: 60000 },
+  resave: false,
+  saveUninitialized: true,
+  secret: process.env.CLIENT_SECRET,
+  store: new MongoStore({ url: process.env.MONGODB_URI })
+}));
 
 app.get('/', (req, res) => {
   res.set('Content-Type', 'text/html');
@@ -17,6 +34,7 @@ app.get('/', (req, res) => {
 
 app.use('/playlists', playlistRouter);
 app.use('/users', userRouter);
+app.use('/auth-spotify', auth.spotifyAuthEndpoint);
 
 db.connect(process.env.MONGODB_URI, (err) => {
   if (err) throw err;
