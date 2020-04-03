@@ -1,6 +1,10 @@
 import React from 'react';
 import SearchPageContainer from './SearchPageContainer';
 import PlaylistDetailContainer from "./PlaylistDetailContainer";
+import Login from './Login';
+import Profile from './Profile';
+
+import Navbar from '../containers/Navbar';
 
 import {
   BrowserRouter as Router,
@@ -14,7 +18,14 @@ const App = () => {
 
   return (
     <Router>
+      <Navbar />
       <Switch>
+        <Route path="/profile">
+          <Profile />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
         <Route path="/playlist/:playlistId">
           <PlaylistDetailContainer />
         </Route>

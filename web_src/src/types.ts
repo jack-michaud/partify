@@ -9,9 +9,26 @@ export interface PlaylistState {
   playlistDetailLoading: boolean;
 }
 
-export interface Profile {
+export interface BasicInfo {
   id: string;
+  name: string;
+  imageUrl: string;
 }
+
+
+export interface Profile {
+  _id: string;
+  name: string;
+  joined: string;
+  spotifyId: string;
+  friends: BasicInfo[];
+  playlists: BasicInfo[];
+  favoriteTracks: BasicInfo[];
+  favoriteArtists: BasicInfo[];
+  favoriteAlbums: BasicInfo[];
+  favoriteGenres: BasicInfo[];
+}
+
 export interface ProfileState {
   profile?: Profile;
   loggedIn: boolean;
