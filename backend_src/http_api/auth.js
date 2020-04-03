@@ -60,6 +60,9 @@ const getSpotifyMe = async (access_token) => {
       'Authorization': 'Bearer ' + access_token,
     }
   });
+  if (data == null) {
+    throw 'Could not get spotify user data';
+  }
   return data;
 }
 
@@ -76,7 +79,9 @@ spotifyAuthEndpoint.post('/', async (req, res, next) => {
       refresh_token
     } = await getUserAccessKeys(code);
 
-    // TODO Store these in user model
+    if (access_token == null) {
+      throw 'access_token is null, code is invalid';
+    }
 
     const {
       display_name, 
@@ -84,10 +89,8 @@ spotifyAuthEndpoint.post('/', async (req, res, next) => {
     } = await getSpotifyMe(access_token);
     console.log(display_name + ' logged in');
 
-    if (await db.get().collection('users').findOne({ spotifyId: id })) {
-      // User already created, do not create
-    } else {
-      // Create new user
+    if (!(await db.get().collection('users').findOne({ spotifyId: id }))) {
+      // Create new user if one does not exist
       console.log('Creating user entry');
       const user = await db.get().collection('users').insertOne({
         name: display_name,
@@ -105,11 +108,10 @@ spotifyAuthEndpoint.post('/', async (req, res, next) => {
     }
 
     req.session.spotifyId = id;
-    res.json({ name: display_name });
+    return res.json({ name: display_name });
   } catch (exception) {
     console.log(exception);
-    res.status(400).json({error: 'Could not auth'});
-    return;
+    return res.status(400).json({error: `Could not auth: ${exception}`});
   }
 });
 
