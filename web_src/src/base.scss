@@ -6,8 +6,14 @@
 body {
   @apply bg-black;
   @apply text-purple-500;
+  font-family: 'Baloo Thambi 2';
 }
 
+@font-face {
+  font-family: 'Baloo Thambi 2';
+  font-weight: 500;
+  src: local('Baloo Thambi 2 Medium'), local('BalooThambi2-Medium'), url(https://fonts.gstatic.com/s/baloothambi2/v1/cY9ffjeOW0NHpmOQXranrbDyu7CzLYe-RB4.woff2) format('woff2');
+}
 
 @tailwind components;
 @tailwind utilities;
