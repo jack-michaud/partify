@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const auth = require('../auth');
-const cors = require('cors');
+const db = require('../db');
 
 const router = new express.Router;
 
@@ -35,6 +35,15 @@ router.get('/:playlistId', async (req, res) => {
     },
   })
     .catch((err) => res.send(err));
+  const user = await db.get().collection('users').findOne({ _id: data.owner.id });
+  if (user) {
+    data.owner = {
+      name: user.name,
+      id: user._id
+    };
+  } else {
+    delete data.owner;
+  }
 
   return res.json(data);
 });
