@@ -20,20 +20,25 @@ const getToken = async () => {
   return access_token;
 };
 
-const refreshAccessToken = async (refresh_token_old) => {
-  const { data: { access_token, refresh_token } } = await axios({
-    url: 'https://accounts.spotify.com/api/token',
-    method: 'post',
-    headers: {
-      'Authorization': 'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'),
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    params: {
-      grant_type: 'refresh_token',
-      refresh_token: refresh_token_old
-    },
-  });
-  return { access_token, refresh_token };
+const refreshAccessToken = async (refresh_token) => {
+  try {
+    const { data: { access_token } } = await axios({
+      url: 'https://accounts.spotify.com/api/token',
+      method: 'post',
+      headers: {
+        'Authorization': 'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      params: {
+        grant_type: 'refresh_token',
+        refresh_token
+      },
+    });
+    return { access_token, refresh_token };
+  } catch (e) {
+    console.log(e);
+    throw e.response.data.error;
+  }
 };
 
 const getUserAccessKeys = async (code) => {
