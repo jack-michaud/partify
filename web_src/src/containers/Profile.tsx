@@ -9,7 +9,11 @@ import ProfileComponent from '../components/ProfileComponent';
 
 const Profile = () => {
 
+  // Fetched from navbar
   const profile = useSelector(profileSelector);
+  if (profile == null) {
+    return null;
+  }
 
   return (
     <>
