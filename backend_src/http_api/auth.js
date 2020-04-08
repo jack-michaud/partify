@@ -34,7 +34,7 @@ const refreshAccessToken = async (refresh_token) => {
         refresh_token
       },
     });
-    return { access_token, refresh_token };
+    return { access_token };
   } catch (e) {
     console.log(e);
     throw e.response.data.error;

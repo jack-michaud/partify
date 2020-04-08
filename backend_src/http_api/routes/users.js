@@ -37,8 +37,8 @@ const getPlaylists = async ({ user, private }) => {
   }
   
   if (private) {
-    const { access_token, refresh_token } = await auth.refreshAccessToken(user.refreshToken);
-    await db.get().collection('users').updateOne({ _id: user._id }, { $set: { accessToken: access_token, refreshToken: refresh_token } });
+    const { access_token } = await auth.refreshAccessToken(user.refreshToken);
+    await db.get().collection('users').updateOne({ _id: user._id }, { $set: { accessToken: access_token } });
     try {
       const { data } = await axios({
         url: 'https://api.spotify.com/v1/me/playlists',
@@ -80,7 +80,7 @@ router.get('/:userId/playlists', async (req, res) => {
 
   const private = req.session.spotifyId === userId;
 
-  return getPlaylists({ user, userId });
+  return getPlaylists({ user, private });
 });
 
 router.get('/:userId', async (req, res) => {
