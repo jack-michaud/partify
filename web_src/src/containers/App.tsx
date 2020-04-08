@@ -20,10 +20,10 @@ const App = () => {
     <Router>
       <Navbar />
       <Switch>
-        <Route path="/profile">
+        <Route path="/profile/:profileId">
           <Profile />
         </Route>
-        <Route path="/profile/:profileId">
+        <Route path="/profile">
           <Profile />
         </Route>
         <Route path="/login">
