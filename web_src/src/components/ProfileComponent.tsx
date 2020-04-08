@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  Link
+} from 'react-router-dom';
 
 import { Profile } from '../types';
 
@@ -9,14 +12,14 @@ interface IProps {
 const ProfileComponent = (props: IProps) => {
   var joinedDate = new Date(props.profile.joined);
   return (
-    <div className="items-center flex flex-col text-purple-500">
+    <div className="items-center flex flex-col text-purple-500 sm:w-full md:w-2/3 mx-auto">
       <div className="flex-col items-center">
         <span className="font-semibold text-5xl">
           {props.profile.name}
         </span>
       </div>
       {/* User profile information */}
-      <div className="flex flex-col w-1/3 bg-purple-900 rounded p-3 m-3">
+      <div className="flex flex-col bg-purple-900 w-full rounded p-3 m-3">
         <div className="flex-col items-center">
           <span className="font-semibold text-3xl">
             About Me
@@ -51,23 +54,32 @@ const ProfileComponent = (props: IProps) => {
         </div>
       </div>
       {/* Playlists */}
-      <div className="flex flex-col w-1/3 bg-purple-900 rounded p-3 m-3">
+      <div className="flex flex-col w-full bg-purple-900 rounded p-3 m-3">
         <div className="flex-col items-center">
           <span className="font-semibold text-3xl">
             My Playlists
           </span>
         </div>
-        <div className="flex flex-row">
-          <div className="w-1/4">
+        <div className="flex flex-col">
+          <div className="w-full">
             <span className="font-semibold">Playlists: </span>
           </div>
-          <div className="w-3/4">
-            <span>{props.profile.playlists}</span>
+          <div className="w-full grid grid-cols-3">
+            { props.profile?.playlists != null &&
+              props.profile.playlists.map(playlist => {
+                return (
+                  <Link to={`/playlist/${playlist.id}`} className="list-none" key={playlist.id}>
+                    <img src={playlist.imageUrl} className="w-32 h-32"/>
+                    <span>{ playlist.name }</span>
+                  </Link>
+                )
+              })
+            }
           </div>
         </div>
       </div>
       {/* Favorites */}
-      <div className="flex flex-col w-1/3 bg-purple-900 rounded p-3 m-3">
+      <div className="flex flex-col w-full bg-purple-900 rounded p-3 m-3">
         <div className="flex-col items-center">
           <span className="font-semibold text-3xl">
             My Favorites

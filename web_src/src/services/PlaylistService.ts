@@ -1,3 +1,4 @@
+import { BasicInfo } from "src/types";
 
 export async function searchPlaylist(query: string): Promise<SpotifyApi.PlaylistObjectSimplified[]> {
   // generates URLSearchParams
@@ -15,7 +16,9 @@ export async function searchPlaylist(query: string): Promise<SpotifyApi.Playlist
 
 const http = {
   async get(url: string) {
-    return await fetch(url);
+    return await fetch(url, {
+      credentials: 'include'
+    });
   }
 }
 
@@ -24,6 +27,21 @@ export async function getPlaylist(id: string): Promise<SpotifyApi.PlaylistObject
     const resp = await http.get(makeURL(`/playlists/${id}`, new URLSearchParams()));
     const data: SpotifyApi.PlaylistObjectFull = await resp.json();
     return data;
+  } catch (e) {
+    console.error(e);
+    throw 'Failed to fetch playlist'
+  }
+}
+
+export async function getPlaylistsForProfile(profileId: string): Promise<BasicInfo[]> {
+  try {
+    const resp = await http.get(makeURL(`/users/${profileId}/playlists`, new URLSearchParams()));
+    const data: SpotifyApi.ListOfCurrentUsersPlaylistsResponse = await resp.json();
+    return data.items.map(playlist => ({
+      id: playlist.id,
+      name: playlist.name,
+      imageUrl: playlist.images[0].url
+    }));
   } catch (e) {
     console.error(e);
     throw 'Failed to fetch playlist'

@@ -6,6 +6,7 @@ import {
 } from '../../types';
 
 const initialState: ProfileState = {
+  selectedProfile: null,
   profile: null,
   loggedIn: null,
   logInError: null
@@ -15,7 +16,10 @@ import {
   PROFILE_LOG_IN_REQUEST,
   PROFILE_LOG_IN_SUCCESS,
   PROFILE_LOG_IN_FAILURE,
-  PROFILE_LOG_OUT
+  PROFILE_LOG_OUT,
+
+  PROFILE_REQUEST,
+  PROFILE_SUCCESS
 } from './actions';
 
 const reducers = (state: ProfileState = initialState, action: ActionType): ProfileState => {
@@ -38,6 +42,18 @@ const reducers = (state: ProfileState = initialState, action: ActionType): Profi
     return {
       ...state,
       loggedIn: false
+    }
+  }
+  if (action.type == PROFILE_REQUEST) {
+    return {
+      ...state,
+      selectedProfile: null
+    }
+  }
+  if (action.type == PROFILE_SUCCESS) {
+    return {
+      ...state,
+      selectedProfile: action.payload
     }
   }
   return state;

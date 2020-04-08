@@ -10,3 +10,7 @@ export const isLoggedInSelector = (state: RootState) =>
 
 export const logInErrorSelector = (state: RootState) => 
   state.profile.logInError;
+
+export const selectedProfileSelector = (state: RootState) => 
+  state.profile.selectedProfile;
+

@@ -24,3 +24,13 @@ export const fetchMe = async () => {
   }
   return await resp.json();
 }
+
+export const fetchProfile = async (profileId: string) => {
+  const resp = await fetch(process.env.API_URL + '/users/' + profileId, {
+    credentials: 'include',
+  });
+  if (resp.status != 200) {
+    throw 'Unable to authenticate';
+  }
+  return await resp.json();
+}
