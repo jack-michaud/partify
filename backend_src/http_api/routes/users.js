@@ -59,7 +59,7 @@ const getPlaylists = async ({ user, private }) => {
     try {
       const { data } = await axios({
         method: 'get',
-        url: `https://api.spotify.com/v1/users/${userId}/playlists`,
+        url: `https://api.spotify.com/v1/users/${user._id}/playlists`,
         headers: {
           'Authorization': 'Bearer ' + token
         },
