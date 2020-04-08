@@ -23,6 +23,9 @@ const App = () => {
         <Route path="/profile">
           <Profile />
         </Route>
+        <Route path="/profile/:profileId">
+          <Profile />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
