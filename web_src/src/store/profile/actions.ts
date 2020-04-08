@@ -67,10 +67,9 @@ export const selectProfile = (profileId: string = null): ThunkActionType<Profile
     });
   } else {
     const resp = await fetchProfileRequest(profileId);
-    const data = await resp.json();
     dispatch({
       type: PROFILE_SUCCESS,
-      payload: data
+      payload: resp
     });
   }
 }
