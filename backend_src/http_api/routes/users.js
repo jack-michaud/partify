@@ -41,10 +41,12 @@ router.get('/:userId/playlists', async (req, res) => {
       },
     })
       .catch((err) => res.send(err));
-    if (user) {
+    // if (user) {
+    // We don't support shared playlists yet
+    if (false) {
       const sharedPlaylists = await db.get().collection('userPlaylists').find(
         { $and: [{ owner: userId }, { $in: { collaborators: req.session.id } } ]}).toArray();
-      if (sharedPlaylists) {
+      if (sharedPlaylists.length) {
         data.playlists = data.playlists.items.concat(sharedPlaylists);
       }
     }
