@@ -7,14 +7,13 @@ const BasicInfo	= mongoose.Schema({
 });
 
 modules.exports = mongoose.Schema({
-	 _id: ObjectId,
+	 _id: String,
 	 name: String,
 	 joined: String,
-	 spotifyId: String,
 	 refreshToken: String,
 	 accessToken: String,
 	 friends: [{
-     type: ObjectId,
+     type: String,
      ref: 'UserModel'
    }],
 	 playlists: [BasicInfo],

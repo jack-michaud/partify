@@ -18,7 +18,7 @@ const getToken = async () => {
     },
   });
   return access_token;
-}
+};
 
 const refreshAccessToken = async (refresh_token_old) => {
   const { data: { access_token, refresh_token } } = await axios({
@@ -34,7 +34,7 @@ const refreshAccessToken = async (refresh_token_old) => {
     },
   });
   return { access_token, refresh_token };
-}
+};
 
 const getUserAccessKeys = async (code) => {
   const { data: { access_token, refresh_token } } = await axios({
@@ -51,7 +51,7 @@ const getUserAccessKeys = async (code) => {
     },
   });
   return { access_token, refresh_token };
-}
+};
 
 const getSpotifyMe = async (access_token) => {
   const { data } = await axios({
@@ -64,7 +64,7 @@ const getSpotifyMe = async (access_token) => {
     throw 'Could not get spotify user data';
   }
   return data;
-}
+};
 
 const spotifyAuthEndpoint = new express.Router;
 
@@ -84,18 +84,18 @@ spotifyAuthEndpoint.post('/', async (req, res, next) => {
     }
 
     const {
-      display_name, 
+      display_name,
       id
     } = await getSpotifyMe(access_token);
     console.log(display_name + ' logged in');
 
-    if (!(await db.get().collection('users').findOne({ spotifyId: id }))) {
+    if (!(await db.get().collection('users').findOne({ _id: id }))) {
       // Create new user if one does not exist
       console.log('Creating user entry');
       const user = await db.get().collection('users').insertOne({
+        _id: id,
         name: display_name,
         joined: new Date().toISOString(),
-        spotifyId: id,
         refreshToken: refresh_token,
         accessToken: access_token,
         friends: [],
@@ -115,9 +115,9 @@ spotifyAuthEndpoint.post('/', async (req, res, next) => {
   }
 });
 
-
 module.exports = {
   getToken,
   getUserAccessKeys,
-  spotifyAuthEndpoint
+  spotifyAuthEndpoint,
+  refreshAccessToken
 };
