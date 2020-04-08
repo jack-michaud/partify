@@ -11,17 +11,20 @@ interface IProps {
 
 const NavbarComponent = (props: IProps) => {
   return (
-    <div className="w-full h-10 bg-purple-900">
-      { props.isLoggedIn != null && 
+    <nav className="flex items-center justify-between flex-wrap w-full p-4 bg-purple-900">
+      <div className="flex mr-6">
+        <span className="font-semibold text-xl tracking-tight">Partify</span>
+      </div>
+      {props.isLoggedIn != null &&
         <div>
           {
-            props.isLoggedIn ? 
-            <Link to={"/profile"}>Profile</Link> :
-            <Link to={"/login"}>Log In</Link>
+            props.isLoggedIn ?
+              <Link to={"/profile"}>Profile</Link> :
+              <Link to={"/login"}>Log In</Link>
           }
         </div>
       }
-    </div>
+    </nav>
   );
 }
 
