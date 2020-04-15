@@ -1,4 +1,5 @@
 import React from 'react';
+import Home from './Home';
 import SearchPageContainer from './SearchPageContainer';
 import PlaylistDetailContainer from "./PlaylistDetailContainer";
 import Login from './Login';
@@ -32,8 +33,11 @@ const App = () => {
         <Route path="/playlist/:playlistId">
           <PlaylistDetailContainer />
         </Route>
-        <Route path="/">
+        <Route path="/search">
           <SearchPageContainer />
+        </Route>
+        <Route path="/">
+          <Home />
         </Route>
       </Switch>
     </Router>
