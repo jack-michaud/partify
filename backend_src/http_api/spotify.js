@@ -1,8 +1,9 @@
 
 const axios = require('axios');
-const auth = require('../auth');
+const auth = require('./auth');
+const db = require('./db');
 
-const searchPlaylist = (query: string) => {
+const searchPlaylist = async (query) => {
   const token = await auth.getToken();
   try {
     const { data } = await axios({
@@ -12,14 +13,14 @@ const searchPlaylist = (query: string) => {
         'Authorization': 'Bearer ' + token
       },
     })
+    return data;
   } catch (err) {
     throw err;
   }
 
-  return data;
 }
 
-const getPlaylistById = (playlistId: string) => {
+const getPlaylistById = async (playlistId) => {
   const token = await auth.getToken();
   try {
     const { data } = await axios({
@@ -29,10 +30,10 @@ const getPlaylistById = (playlistId: string) => {
         'Authorization': 'Bearer ' + token
       },
     })
+    return data;
   } catch (err) {
     throw err;
   }
-  return data;
 }
 
 
@@ -80,8 +81,25 @@ const getPlaylists = async ({ user, private }) => {
   }
 }
 
+const getTrackInfo = async (trackId) => {
+  const token = await auth.getToken();
+  try {
+    const { data } = await axios({
+      method: 'get',
+      url: `https://api.spotify.com/v1/tracks/${trackId}`,
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
+    })
+    return data;
+  } catch (err) {
+    throw err;
+  }
+}
+
 module.exports = {
   getPlaylistById,
   searchPlaylist,
-  getPlaylists
+  getPlaylists,
+  getTrackInfo
 }

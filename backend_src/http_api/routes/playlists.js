@@ -12,9 +12,10 @@ router.get('/', async (req, res) => {
   const query = req.originalUrl.split('\/', 3)[2];
 
   try {
-    const data = spotify.searchPlaylist(query);
+    const data = await spotify.searchPlaylist(query);
     return res.json(data);
   } catch (err) {
+    console.error(err);
     return res.send(err);
   }
 });
@@ -23,7 +24,7 @@ router.get('/:playlistId', async (req, res) => {
   const { playlistId } = req.params;
 
   try {
-    const data = spotify.getPlaylistById(playlistId);
+    const data = await spotify.getPlaylistById(playlistId);
     const user = await db.get().collection('users').findOne({ _id: data.owner.id });
     if (user) {
       data.owner = {
@@ -35,6 +36,7 @@ router.get('/:playlistId', async (req, res) => {
     }
     return res.json(data);
   } catch (err) {
+    console.error(err);
     return res.send(err)
   }
 });
