@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const auth = require('../auth');
 const axios = require('axios');
+const spotify = require('../spotify');
 
 const router = new express.Router;
 
@@ -20,7 +21,7 @@ router.get('/me', async (req, res) => {
   if (!user) {
     return res.status(404).json(`User with id ${spotifyId} not found...`);
   }
-  const playlists = await getPlaylists({ user, private: true });
+  const playlists = await spotify.getPlaylists({ user, private: true });
   user.playlists = playlists;
   // Dont surface access token and refresh token
   delete user.accessToken;
@@ -31,56 +32,13 @@ router.get('/me', async (req, res) => {
 
 
 
-const getPlaylists = async ({ user, private }) => {
-  if (private == null) {
-    private = false;
-  }
-  
-  if (private) {
-    const { access_token } = await auth.refreshAccessToken(user.refreshToken);
-    await db.get().collection('users').updateOne({ _id: user._id }, { $set: { accessToken: access_token } });
-    try {
-      const { data } = await axios({
-        url: 'https://api.spotify.com/v1/me/playlists',
-        headers: {
-          'Authorization': 'Bearer ' + access_token,
-        }
-      })
-      return data.items.map(playlist => ({
-        id: playlist.id,
-        imageUrl: playlist.images[0].url,
-        name: playlist.name,
-      }));
-    } catch (err) {
-      throw err;
-    }
-  } else {
-    token = await auth.getToken();
-    try {
-      const { data } = await axios({
-        method: 'get',
-        url: `https://api.spotify.com/v1/users/${user._id}/playlists`,
-        headers: {
-          'Authorization': 'Bearer ' + token
-        },
-      })
-      return data.items.map(playlist => ({
-        id: playlist.id,
-        imageUrl: playlist.images[0].url,
-        name: playlist.name,
-      }));
-    } catch (err) {
-      throw err
-    }
-  }
-}
 router.get('/:userId/playlists', async (req, res) => {
   const { userId } = req.params;
   const user = await db.get().collection('users').findOne({ _id: userId });
 
   const private = req.session.spotifyId === userId;
 
-  return getPlaylists({ user, private });
+  return spotify.getPlaylists({ user, private });
 });
 
 router.get('/:userId', async (req, res) => {
@@ -90,7 +48,7 @@ router.get('/:userId', async (req, res) => {
   if (!user) {
     return res.status(404).json(`User with id ${userId} not found...`).send();
   }
-  const playlists = await getPlaylists({ user, private: false });
+  const playlists = await spotify.getPlaylists({ user, private: false });
   user.playlists = playlists;
   return res.json(user);
 });
