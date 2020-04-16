@@ -16,7 +16,7 @@ export interface BasicInfo {
 }
 
 export interface Recommendation {
-  id: string;
+  _id: string;
   profile: {
     id: string;
     name: string;

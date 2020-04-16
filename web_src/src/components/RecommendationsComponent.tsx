@@ -4,6 +4,7 @@ import RecommendationListItem from './ReccomendationListItem';
 
 
 interface IProps {
+  clearRecommendation: (rId: string) => Promise<void>;
   recommendations: Recommendation[];
 }
 const RecommendationsComponent = (props: IProps) => {
@@ -15,7 +16,8 @@ const RecommendationsComponent = (props: IProps) => {
       {
         props.recommendations.map(recommendation => (
           <RecommendationListItem 
-            key={recommendation.id} 
+            clearRecommendation={props.clearRecommendation}
+            key={recommendation._id} 
             recommendation={recommendation} />
         ))
       }

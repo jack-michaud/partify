@@ -9,7 +9,7 @@ import 'babel-polyfill';
 import SpotifyIcon from './SpotifyIcon';
 
 interface IProps {
-    playlist: SpotifyApi.PlaylistObjectFull;
+  playlist: SpotifyApi.PlaylistObjectFull;
 }
 
 const PlaylistDetailComponent = (props: IProps) => {
