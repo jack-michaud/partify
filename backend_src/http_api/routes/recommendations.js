@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const auth = require('../auth');
 const db = require('../db');
+const { ObjectId } = require('mongodb');
 const spotify = require('../spotify');
 
 const router = new express.Router;
@@ -35,10 +36,9 @@ router.post('/', async (req, res) => {
     forUserId,
     trackId
   } = req.body;
-
   try {
     const track = await spotify.getTrackInfo(trackId);
-    const recommendation = await db.get().collection('recommendations').insertOne({
+    const data = {
       profile: {
         id: user._id,
         name: user.name
@@ -46,8 +46,32 @@ router.post('/', async (req, res) => {
       forUserId,
       track,
       createdTime: new Date().toISOString()
-    });
-    return res.json(recommendations);
+    }
+    const response = await db.get().collection('recommendations').insertOne(data);
+    return res.json(data);
+  } catch (err) {
+    console.error(err);
+    return res.status(400).send(err);
+  }
+});
+
+
+router.delete('/:recommendationId', async (req, res) => {
+  const {
+    recommendationId
+  } = req.params;
+  const {
+    spotifyId
+  } = req.session;
+  if (!spotifyId) {
+    res.status(401).json({ error: 'Unauthenticated' });
+    return;
+  }
+
+  try {
+    const resp = await db.get().collection('recommendations').deleteOne({ _id: ObjectId(recommendationId), forUserId: spotifyId });
+    console.log(resp);
+    return res.status(200).send('');
   } catch (err) {
     console.error(err);
     return res.status(400).send(err);
