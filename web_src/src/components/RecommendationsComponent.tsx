@@ -13,6 +13,10 @@ const RecommendationsComponent = (props: IProps) => {
   }
   return (
     <div>
+      { props.recommendations.length == 0 && 
+      <div className="text-center text-2xl font-bold py-2">
+        No recommendations...
+      </div> }
       {
         props.recommendations.map(recommendation => (
           <RecommendationListItem 

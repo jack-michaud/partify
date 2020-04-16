@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import MakeRecommendationComponent from '../components/MakeRecommendationComponent';
 import { makeRecommendation } from '../services/RecommendationService';
+import { getFriends } from '../services/UsersService';
 
 const wait = (time: number /* ms */) => {
   return new Promise(res => {
@@ -16,13 +17,17 @@ interface IProps {
 const MakeRecommendation = (props: IProps) => {
   const { track } = props;
 
-  const [userSearchResults, setUserSearchResults] = useState<{id: string; name: string}[]>([]);
+  const [userSearchResults, setUserSearchResults] = useState<{_id: string; name: string}[]>([]);
   const [active, setActive] = useState<boolean>(false);
   const [recommendationSuccess, setRecommendationSuccess] = useState<boolean>(false);
 
   // On mount, expand MakeRecommendation component
+  // and get users
   useEffect(() => {
-    setActive(true);
+    (async () => {
+      setActive(true);
+      setUserSearchResults(await getFriends());
+    })()
   }, []);
 
 
