@@ -28,14 +28,15 @@ class SearchPageComponent extends React.PureComponent<IProps> {
             Search Playlist
                   </button>
         </div>
-        {
-          this.props.playlists && this.props.playlists.length > 0 && this.props.playlists.map(playlist =>
-            <li key={playlist.id}>
-              <PlaylistListItem playlist={playlist} />
-            </li>
-
-          )
-        }
+        <div className="my-10">
+          {
+            this.props.playlists && this.props.playlists.length > 0 && this.props.playlists.map(playlist =>
+              <li key={playlist.id}>
+                <PlaylistListItem playlist={playlist} />
+              </li>
+            )
+          }
+        </div>
       </div >
     )
   }
