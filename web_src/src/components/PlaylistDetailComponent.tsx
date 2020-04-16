@@ -26,7 +26,13 @@ const PlaylistDetailComponent = (props: IProps) => {
               <Link to={`/playlist/${props.playlist.id}`}>Playlist</Link>
             </div>
             <h1 className="text-2xl">{props.playlist.name}</h1>
-            <h3>Owner: {props.playlist?.owner?.name || '(not on Partify)'}</h3>
+            <h3>
+              Owner: 
+              {props.playlist?.owner?.name ?
+              <Link to={`/profile/${props.playlist.owner.id}`}>
+                { props.playlist.owner.name }
+              </Link>
+              : ' (not on Partify)'}</h3>
             <a className="transition" 
               target="_blank"
               href={props.playlist.external_urls.spotify}>

@@ -29,6 +29,7 @@ export interface Profile {
 }
 
 export interface ProfileState {
+  selectedProfile?: Profile;
   profile?: Profile;
   loggedIn: boolean;
   logInError: string;
