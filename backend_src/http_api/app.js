@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const playlistRouter = require('./routes/playlists');
 const userRouter = require('./routes/users');
 const recommendationRouter = require('./routes/recommendations');
+const featuredRouter = require('./routes/featured');
 const auth = require('./auth');
 
 
@@ -39,6 +40,7 @@ app.get('/', (req, res) => {
 app.use('/playlists', playlistRouter);
 app.use('/users', userRouter);
 app.use('/recommendations', recommendationRouter);
+app.use('/featured', featuredRouter);
 app.use('/auth-spotify', auth.spotifyAuthEndpoint);
 
 db.connect(process.env.MONGODB_URI, (err) => {

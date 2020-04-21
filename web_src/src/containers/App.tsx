@@ -5,6 +5,7 @@ import PlaylistDetailContainer from "./PlaylistDetailContainer";
 import Login from './Login';
 import Profile from './Profile';
 import Recommendations from './Recommendations';
+import Featured from './Featured';
 
 import Navbar from '../containers/Navbar';
 
@@ -39,6 +40,9 @@ const App = () => {
         </Route>
         <Route path="/recommendations">
           <Recommendations />
+        </Route>
+        <Route path="/featured">
+          <Featured />
         </Route>
         <Route path="/">
           <Home />

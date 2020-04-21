@@ -46,8 +46,8 @@ router.post('/', async (req, res) => {
       forUserId,
       track,
       createdTime: new Date().toISOString()
-    }
-    const response = await db.get().collection('recommendations').insertOne(data);
+    };
+    await db.get().collection('recommendations').insertOne(data);
     return res.json(data);
   } catch (err) {
     console.error(err);

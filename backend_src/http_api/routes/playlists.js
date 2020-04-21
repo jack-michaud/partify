@@ -8,7 +8,6 @@ const spotify = require('../spotify');
 const router = new express.Router;
 
 router.get('/', async (req, res) => {
-  // TODO: Parse req.query as JSON and validate it
   const query = req.originalUrl.split('\/', 3)[2];
 
   try {
@@ -37,7 +36,7 @@ router.get('/:playlistId', async (req, res) => {
     return res.json(data);
   } catch (err) {
     console.error(err);
-    return res.send(err)
+    return res.send(err);
   }
 });
 

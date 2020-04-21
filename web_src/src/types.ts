@@ -24,7 +24,6 @@ export interface Recommendation {
   track: SpotifyApi.TrackObjectFull;
 }
 
-
 export interface Profile {
   _id: string;
   name: string;

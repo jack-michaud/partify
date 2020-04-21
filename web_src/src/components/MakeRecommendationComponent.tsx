@@ -5,17 +5,17 @@ interface IProps {
   makeRecommendation: (userId: string) => Promise<void>;
   active: boolean;
   recommendationSuccess: boolean;
-  track: SpotifyApi.TrackObjectFull; 
-  userSearchResults: { _id: string, name: string }[]; 
+  track: SpotifyApi.TrackObjectFull;
+  userSearchResults: { _id: string, name: string }[];
 }
 const MakeRecommendationComponent = (props: IProps) => {
   return (
     <div className={`${props.active ? ' ' : 'hidden'} w-full block my-5`}>
-      { props.recommendationSuccess && 
+      { props.recommendationSuccess &&
       <div>
         Successfully recommended { props.track.name }!
       </div> }
-      
+
       {
         !props.recommendationSuccess && props.userSearchResults.map( user => (
           <div key={user._id} className="block">

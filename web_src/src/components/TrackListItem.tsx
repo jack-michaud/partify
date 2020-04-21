@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SpotifyIcon from './SpotifyIcon';
 import MakeRecommendation from '../containers/MakeRecommendation';
+import MakeFeatured from '../containers/MakeFeatured';
 
 interface IProps {
   playlistIdx: number;
@@ -13,6 +14,7 @@ const TrackListItem = (props: IProps) => {
   } = props;
 
   const [recommendDialog, setRecommendDialog] = useState<boolean>(false);
+  const [featureDialog, setFeaturedDialog] = useState<boolean>(false);
 
   return (
     <div>
@@ -35,16 +37,23 @@ const TrackListItem = (props: IProps) => {
             <button className="mr-2" onClick={() => setRecommendDialog(!recommendDialog)}>
               Recommend to a friend
             </button>
+            <button className="mr-2" onClick={() => setFeaturedDialog(!featureDialog)}>
+              Feature
+            </button>
             <button className="mr-2">
               Add to your own playlist
             </button>
           </div>
         </div>
       </div>
-      { recommendDialog && 
-      <MakeRecommendation 
-        track={props.track.track} 
+      { recommendDialog &&
+      <MakeRecommendation
+        track={props.track.track}
         resolve={() => setRecommendDialog(false)} /> }
+      { featureDialog &&
+      <MakeFeatured
+        track={props.track.track}
+        resolve={() => setFeaturedDialog(false)} /> }
     </div>
   )
 }
