@@ -6,16 +6,11 @@ interface IProps {
   track: SpotifyApi.TrackObjectFull;
 }
 const MakeFeaturedComponent = (props: IProps) => {
+  const message = props.featuredSuccess ? `Successfully featured ${props.track.name}!`
+                : `Failed to feature ${props.track.name}!`;
   return (
     <div className={`${props.active ? ' ' : 'hidden'} w-full block my-5`}>
-      { props.featuredSuccess &&
-      <div>
-        Successfully featured { props.track.name }!
-      </div> }
-      { !props.featuredSuccess &&
-        <div>
-          Failed to feature { props.track.name }!
-        </div> }
+      {message}
     </div>
   )
 }

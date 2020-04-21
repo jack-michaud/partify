@@ -72,8 +72,7 @@ router.delete('/:featuredId', async (req, res) => {
   }
 
   try {
-    const resp = await db.get().collection('featured').deleteOne({ _id: ObjectId(featuredId), forUserId: spotifyId });
-    console.log(resp);
+    const resp = await db.get().collection('featured').deleteOne({ _id: ObjectId(featuredId) });
     return res.status(200).send('');
   } catch (err) {
     console.error(err);

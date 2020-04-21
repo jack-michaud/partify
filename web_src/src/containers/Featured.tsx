@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Recommendation } from '../types';
 import { getFeatured, removeFeatured } from '../services/FeaturedService';
+import {isPromoterSelector} from '../store/profile/selectors';
+import {useSelector} from 'react-redux';
 
 import FeaturedComponent from '../components/FeaturedComponent';
 
 const Featured = () => {
   const [featured, setFeatured] = useState<Recommendation[]>();
+  const isPromoter = useSelector(isPromoterSelector);
 
   useEffect(() => {
     (async () => {
@@ -25,7 +28,9 @@ const Featured = () => {
   return (
     <FeaturedComponent
       clearFeatured={clearFeatured}
-      featured={featured} />
+      featured={featured}
+      isPromoter={isPromoter}
+    />
   );
 }
 export default Featured;

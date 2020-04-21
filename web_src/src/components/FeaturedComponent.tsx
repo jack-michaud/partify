@@ -6,12 +6,12 @@ import FeaturedListItem from './FeaturedListItem';
 interface IProps {
   clearFeatured: (fId: string) => Promise<void>;
   featured: Recommendation[];
+  isPromoter: boolean;
 }
 const FeaturedComponent = (props: IProps) => {
   if (!props.featured) {
     return null;
   }
-  console.log('The featured are ', props.featured);
   return (
     <div>
       { props.featured.length == 0 &&
@@ -23,7 +23,9 @@ const FeaturedComponent = (props: IProps) => {
           <FeaturedListItem
             clearFeatured={props.clearFeatured}
             key={f._id}
-            featured={f} />
+            featured={f}
+            isPromoter={props.isPromoter}
+          />
         ))
       }
     </div>

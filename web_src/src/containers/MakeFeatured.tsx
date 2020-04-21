@@ -23,27 +23,21 @@ const MakeFeatured = (props: IProps) => {
   useEffect(() => {
     (async () => {
       setActive(true);
+      try {
+        await makeFeatured(track.id)
+        setFeaturedSuccess(true);
+      } catch (e) {
+        setFeaturedSuccess(false);
+        throw e;
+      }
+      // Collapse after 1.5s
+      await wait(1500);
+      setActive(false);
+      await wait(100);
+      props.resolve();
     })()
   }, []);
 
-  const _makeFeatured = async () => {
-    try {
-      await makeFeatured(track.id)
-      setFeaturedSuccess(true);
-    } catch (e) {
-      setFeaturedSuccess(false);
-      throw e;
-    }
-    // Collapse after 1.5s
-    await wait(1500);
-    setActive(false);
-    await wait(100);
-    props.resolve();
-  }
-
-  if (!featuredSuccess) {
-    _makeFeatured();
-  }
   return (
     <MakeFeaturedComponent
       featuredSuccess={featuredSuccess}
