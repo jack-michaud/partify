@@ -5,6 +5,7 @@ import PlaylistDetailContainer from "./PlaylistDetailContainer";
 import Login from './Login';
 import Profile from './Profile';
 import Recommendations from './Recommendations';
+import PrivacyPopup from './PrivacyPopup';
 
 import Navbar from '../containers/Navbar';
 
@@ -44,6 +45,7 @@ const App = () => {
           <Home />
         </Route>
       </Switch>
+      <PrivacyPopup />
     </Router>
   )
 };
