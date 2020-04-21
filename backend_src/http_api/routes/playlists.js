@@ -3,49 +3,42 @@ const axios = require('axios');
 const auth = require('../auth');
 const db = require('../db');
 
+const spotify = require('../spotify');
+
 const router = new express.Router;
 
 router.get('/', async (req, res) => {
-  const token = await auth.getToken();
   // TODO: Parse req.query as JSON and validate it
   const query = req.originalUrl.split('\/', 3)[2];
 
-  const { data } = await axios({
-    method: 'get',
-    url: `https://api.spotify.com/v1/search${query}`,
-    headers: {
-      'Authorization': 'Bearer ' + token
-    },
-  })
-    .catch((err) => res.send(err));
-
-  // TODO: Only return the fields we actually care about
-  return res.json(data);
+  try {
+    const data = await spotify.searchPlaylist(query);
+    return res.json(data);
+  } catch (err) {
+    console.error(err);
+    return res.send(err);
+  }
 });
 
 router.get('/:playlistId', async (req, res) => {
-  const token = await auth.getToken();
   const { playlistId } = req.params;
 
-  const { data } = await axios({
-    method: 'get',
-    url: `https://api.spotify.com/v1/playlists/${playlistId}`,
-    headers: {
-      'Authorization': 'Bearer ' + token
-    },
-  })
-    .catch((err) => res.send(err));
-  const user = await db.get().collection('users').findOne({ _id: data.owner.id });
-  if (user) {
-    data.owner = {
-      name: user.name,
-      id: user._id
-    };
-  } else {
-    delete data.owner;
+  try {
+    const data = await spotify.getPlaylistById(playlistId);
+    const user = await db.get().collection('users').findOne({ _id: data.owner.id });
+    if (user) {
+      data.owner = {
+        name: user.name,
+        id: user._id
+      };
+    } else {
+      delete data.owner;
+    }
+    return res.json(data);
+  } catch (err) {
+    console.error(err);
+    return res.send(err)
   }
-
-  return res.json(data);
 });
 
 module.exports = router;

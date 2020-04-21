@@ -15,6 +15,15 @@ export interface BasicInfo {
   imageUrl: string;
 }
 
+export interface Recommendation {
+  _id: string;
+  profile: {
+    id: string;
+    name: string;
+  },
+  track: SpotifyApi.TrackObjectFull;
+}
+
 
 export interface Profile {
   _id: string;

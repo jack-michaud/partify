@@ -8,7 +8,10 @@ const HomeButton = (props) =>  (
   </div>
 )
 
-const HomeComponent = () => {
+interface IProps {
+  isLoggedIn: boolean;
+}
+const HomeComponent = (props: IProps) => {
   return (
     <div>
       <div className="w-full h-screen flex items-center justify-around">
@@ -21,11 +24,12 @@ const HomeComponent = () => {
               Featured
             </HomeButton>
           </Link>
-          <Link to="/recommendations">
-            <HomeButton>
-              Recommendations
-            </HomeButton>
-          </Link>
+          { props.isLoggedIn && 
+            <Link to="/recommendations">
+              <HomeButton>
+                Recommendations
+              </HomeButton>
+            </Link> }
           <Link to="/search">
             <HomeButton>
               Search

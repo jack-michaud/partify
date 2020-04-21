@@ -4,6 +4,7 @@ import SearchPageContainer from './SearchPageContainer';
 import PlaylistDetailContainer from "./PlaylistDetailContainer";
 import Login from './Login';
 import Profile from './Profile';
+import Recommendations from './Recommendations';
 
 import Navbar from '../containers/Navbar';
 
@@ -35,6 +36,9 @@ const App = () => {
         </Route>
         <Route path="/search">
           <SearchPageContainer />
+        </Route>
+        <Route path="/recommendations">
+          <Recommendations />
         </Route>
         <Route path="/">
           <Home />
