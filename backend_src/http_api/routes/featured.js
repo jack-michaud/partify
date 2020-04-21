@@ -9,7 +9,6 @@ const router = new express.Router;
 
 // All featured songs
 router.get('/', async (req, res) => {
-  console.log('Getting featured');
   const {
     spotifyId
   } = req.session;
@@ -20,22 +19,24 @@ router.get('/', async (req, res) => {
   let featured = await db.get().collection('featured').find({});
 
   featured = await featured.toArray();
-  console.log(featured);
 
   return res.json(featured);
 });
 
 // Create new featured song
 router.post('/', async (req, res) => {
-  console.log('Posting featured');
   const {
     spotifyId
   } = req.session;
   if (!spotifyId) {
-    res.status(401).json({ error: 'Unauthenticated' });
-    return;
+    return res.status(401).json({ error: 'Unauthenticated' });
   }
   const user = await db.get().collection('users').findOne({ _id: spotifyId });
+
+  console.log('User is promoter? ', user.isPromoter);
+  if (!user.isPromoter) {
+    return res.status(401).json({ error: 'Not a Promoter' });
+  }
 
   const {
     trackId
@@ -59,7 +60,6 @@ router.post('/', async (req, res) => {
 });
 
 router.delete('/:featuredId', async (req, res) => {
-  console.log('Deleting featured');
   const {
     featuredId
   } = req.params;
@@ -71,11 +71,15 @@ router.delete('/:featuredId', async (req, res) => {
     return;
   }
 
+  const user = await db.get().collection('users').findOne({ _id: spotifyId });
+  if (!user.isPromoter) {
+    return res.status(401).json({ error: 'Not a Promoter' });
+  }
+
   try {
     const resp = await db.get().collection('featured').deleteOne({ _id: ObjectId(featuredId) });
     return res.status(200).send('');
   } catch (err) {
-    console.error(err);
     return res.status(400).send(err);
   }
 });
