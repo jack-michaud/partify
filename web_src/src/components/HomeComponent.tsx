@@ -37,8 +37,6 @@ const HomeComponent = (props: IProps) => {
           </Link>
         </div>
       </div>
-      <div className="h-10 bg-purple-900">
-      </div>
     </div>
   )
 }
