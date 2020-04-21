@@ -6,6 +6,9 @@ import Login from './Login';
 import Profile from './Profile';
 import Recommendations from './Recommendations';
 import Featured from './Featured';
+import PrivacyPopup from './PrivacyPopup';
+import PrivacyPolicyPage from './PrivacyPolicyPage';
+import Footer from './Footer';
 
 import Navbar from '../containers/Navbar';
 
@@ -43,11 +46,15 @@ const App = () => {
         </Route>
         <Route path="/featured">
           <Featured />
+        <Route path="/privacy">
+          <PrivacyPolicyPage />
         </Route>
         <Route path="/">
           <Home />
         </Route>
       </Switch>
+      <PrivacyPopup />
+      <Footer />
     </Router>
   )
 };
