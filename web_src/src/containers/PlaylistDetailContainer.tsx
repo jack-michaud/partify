@@ -9,8 +9,11 @@ import {
 import {
   playlistPreviewSelector,
   playlistDetailSelector,
-  playlistDetailLoadingSelector
+  playlistDetailLoadingSelector,
 } from '../store/playlists/selectors';
+import {
+  isPromoterSelector, isLoggedInSelector
+} from '../store/profile/selectors';
 
 
 import { useParams } from 'react-router-dom';
@@ -27,6 +30,8 @@ const PlaylistDetailContainer = () => {
   const playlist = useSelector(playlistDetailSelector);
   const loading = useSelector(playlistDetailLoadingSelector);
   const playlistPreview = useSelector(playlistPreviewSelector);
+  const isPromoter = useSelector(isPromoterSelector);
+  const isLoggedIn = useSelector(isLoggedInSelector);
 
   useEffect(() => {
     dispatch(requestPlaylistDetailAction(playlistId));
@@ -39,6 +44,8 @@ const PlaylistDetailContainer = () => {
     return (
       <PlaylistDetailComponent 
         loading={loading}
+        isPromoter={isPromoter}
+        isLoggedIn={isLoggedIn}
         // Show
         playlist={playlist || playlistPreview} />
       )

@@ -1,7 +1,6 @@
 
 import {
   ProfileState,
-  Profile,
   ActionType
 } from '../../types';
 

@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import SpotifyIcon from './SpotifyIcon';
 import MakeRecommendation from '../containers/MakeRecommendation';
+import MakeFeatured from '../containers/MakeFeatured';
 
 interface IProps {
   playlistIdx: number;
   track: SpotifyApi.PlaylistTrackObject;
+  isPromoter: boolean;
+  isLoggedIn: boolean;
 }
 
 const TrackListItem = (props: IProps) => {
   const {
-    playlistIdx, track
+    playlistIdx, track, isPromoter, isLoggedIn
   } = props;
 
   const [recommendDialog, setRecommendDialog] = useState<boolean>(false);
+  const [featureDialog, setFeaturedDialog] = useState<boolean>(false);
 
   return (
     <div>
@@ -32,19 +36,26 @@ const TrackListItem = (props: IProps) => {
               className="ml-2"><SpotifyIcon/></a>
           </div>
           <div className="sm:flex mt-2">
-            <button className="mr-2" onClick={() => setRecommendDialog(!recommendDialog)}>
+            <button className={isLoggedIn ? 'mr-2' : 'hidden'} onClick={() => setRecommendDialog(!recommendDialog)}>
               Recommend to a friend
             </button>
-            <button className="mr-2">
+            <button className={isPromoter ? 'mr-2' : 'hidden'} onClick={() => setFeaturedDialog(!featureDialog)}>
+              Feature
+            </button>
+            <button className={isLoggedIn ? 'mr-2' : 'hidden'}>
               Add to your own playlist
             </button>
           </div>
         </div>
       </div>
-      { recommendDialog && 
-      <MakeRecommendation 
-        track={props.track.track} 
+      { recommendDialog &&
+      <MakeRecommendation
+        track={props.track.track}
         resolve={() => setRecommendDialog(false)} /> }
+      { featureDialog &&
+      <MakeFeatured
+        track={props.track.track}
+        resolve={() => setFeaturedDialog(false)} /> }
     </div>
   )
 }

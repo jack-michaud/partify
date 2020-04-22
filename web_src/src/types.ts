@@ -24,11 +24,11 @@ export interface Recommendation {
   track: SpotifyApi.TrackObjectFull;
 }
 
-
 export interface Profile {
   _id: string;
   name: string;
   joined: string;
+  isPromoter: boolean;
   friends: BasicInfo[];
   playlists: BasicInfo[];
   favoriteTracks: BasicInfo[];

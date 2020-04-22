@@ -10,6 +10,8 @@ import SpotifyIcon from './SpotifyIcon';
 
 interface IProps {
   playlist: SpotifyApi.PlaylistObjectFull;
+  isPromoter: boolean;
+  isLoggedIn: boolean;
 }
 
 const PlaylistDetailComponent = (props: IProps) => {
@@ -50,7 +52,7 @@ const PlaylistDetailComponent = (props: IProps) => {
         <div className="px-3">
           {
             props.playlist.tracks.items.map((track, idx) => (
-              <TrackListItem key={idx} playlistIdx={idx} track={track}/>
+              <TrackListItem key={idx} playlistIdx={idx} track={track} isPromoter={props.isPromoter} isLoggedIn={props.isLoggedIn} />
             ))
           }
         </div>

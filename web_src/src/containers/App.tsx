@@ -5,6 +5,7 @@ import PlaylistDetailContainer from "./PlaylistDetailContainer";
 import Login from './Login';
 import Profile from './Profile';
 import Recommendations from './Recommendations';
+import Featured from './Featured';
 import PrivacyPopup from './PrivacyPopup';
 import PrivacyPolicyPage from './PrivacyPolicyPage';
 import Footer from './Footer';
@@ -43,6 +44,8 @@ const App = () => {
         <Route path="/recommendations">
           <Recommendations />
         </Route>
+        <Route path="/featured">
+          <Featured />
         <Route path="/privacy">
           <PrivacyPolicyPage />
         </Route>
