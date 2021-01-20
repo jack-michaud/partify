@@ -40,7 +40,7 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/reselect": "^2.2.0",
     "@types/spotify-api": "0.0.2",
-    "gsap": "^3.2.6",
+    "gsap": "^3.6.0",
     "mqtt": "^3.0.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
